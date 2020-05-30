@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * @author zyyy
@@ -16,13 +17,14 @@ import javax.persistence.Id;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-public class User {
+public class Orders {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer orderId;
     private Integer userId;
-    private String userName;
-    private String  password;
-    private Integer type;
-    private String sex;
-    private String profile;
-    private Integer phoneNumber;
+    private Integer shopId;
+    private Date createTime;
+    private String comment;
+    private Integer status;
+    private String address;
 }

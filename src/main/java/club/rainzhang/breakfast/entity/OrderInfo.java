@@ -14,15 +14,13 @@ import javax.persistence.Id;
  */
 @Data
 @Entity
-@DynamicInsert
 @DynamicUpdate
-public class User {
+@DynamicInsert
+public class OrderInfo {
     @Id
-    private Integer userId;
-    private String userName;
-    private String  password;
-    private Integer type;
-    private String sex;
-    private String profile;
-    private Integer phoneNumber;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Integer orderId;
+    private Integer foodId;
+    private Integer account;
 }

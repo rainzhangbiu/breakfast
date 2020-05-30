@@ -1,5 +1,6 @@
 package club.rainzhang.breakfast.entity;
 
+
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,17 +13,18 @@ import javax.persistence.Id;
 /**
  * @author zyyy
  */
+
 @Data
 @Entity
-@DynamicInsert
 @DynamicUpdate
-public class User {
+@DynamicInsert
+public class Shops {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer shopId;
     private Integer userId;
-    private String userName;
-    private String  password;
-    private Integer type;
-    private String sex;
-    private String profile;
-    private Integer phoneNumber;
+    private String shopName;
+    private String shopAddress;
+    private Integer shopStatus;
+    private String shopDesc;
 }
