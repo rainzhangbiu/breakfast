@@ -18,7 +18,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public int login(UserNameAndPassword userNameAndPassword) {
-        User user = userRepository.findById(userNameAndPassword.getUserName()).get();
+        User user = userRepository.findById(Integer.parseInt(userNameAndPassword.getUserName())).get();
         if (user.getUserId() == null) {
             return 2;
         } else if (user.getPassword().equals(userNameAndPassword.getPassword())) {

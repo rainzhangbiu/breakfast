@@ -7,6 +7,6 @@ import lombok.Data;
  */
 @Data
 public class UserNameAndPassword {
-    private Integer userName;
+    private String userName;
     private String password;
 }
