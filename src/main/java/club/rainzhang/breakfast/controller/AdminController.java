@@ -21,8 +21,13 @@ public class AdminController {
         return adminService.findAll();
     }
 
-    @PostMapping("/changeShopStatus/{shopId}/{status}")
-    public int changeShopStatus(@PathVariable("shopId") Integer shopId,@PathVariable("status") Integer status) {
-        return adminService.changeShopStatus(shopId,status);
+    @PostMapping("/changeShopStatus")
+    public int changeShopStatus(@RequestBody Shops shop) {
+        return adminService.changeShopStatus(shop.getShopId());
+    }
+
+    @GetMapping("/findAllByShopName")
+    public List<Shops> findAllByShopName(@RequestBody Shops shop) {
+        return adminService.findAllByShopName(shop.getShopName());
     }
 }

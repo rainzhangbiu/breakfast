@@ -18,13 +18,28 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public int login(UserNameAndPassword userNameAndPassword) {
-        User user = userRepository.findById(Integer.parseInt(userNameAndPassword.getUserName())).get();
-        if (user.getUserId() == null) {
-            return 2;
-        } else if (user.getPassword().equals(userNameAndPassword.getPassword())) {
-            return 1;
-        } else {
-            return 3;
+        try {
+            User user = userRepository.findById(Integer.parseInt(userNameAndPassword.getUserName())).get();
+            if (user.getPassword().equals(userNameAndPassword.getPassword())) {
+                return user.getType();
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return -1;
         }
+    }
+
+    @Override
+    public int register(User user) throws Exception {
+        try {
+            User user1 = userRepository.findById(user.getUserId()).get();
+            return 1;
+        } catch (Exception e) {
+            userRepository.save(user);
+            return 0;
+        }
+
     }
 }
