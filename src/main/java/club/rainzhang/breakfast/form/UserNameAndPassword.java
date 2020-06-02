@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * @author zyyy
+ * 接受前端登陆是传递过来的 json 数据
  */
 @Data
 public class UserNameAndPassword {
