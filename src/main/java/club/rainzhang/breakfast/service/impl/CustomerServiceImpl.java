@@ -2,19 +2,21 @@ package club.rainzhang.breakfast.service.impl;
 
 import club.rainzhang.breakfast.entity.Foods;
 import club.rainzhang.breakfast.entity.Shops;
-import club.rainzhang.breakfast.entity.User;
 import club.rainzhang.breakfast.repository.ShopsRepository;
 import club.rainzhang.breakfast.repository.UserRepository;
 import club.rainzhang.breakfast.service.CustomerService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author wrj
  */
+@Service
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private ShopsRepository shopsRepository;
     private UserRepository userRepository;
@@ -31,15 +33,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
-
-
     @Override
     public int updatePersonalInfo(JSONObject personalInfo) {
         return 0;
     }
 
     @Override
-    public int generateOrder(JSONObject OrderInfo) {
+    public int generateOrder(JSONObject orderInfo) {
         return 0;
     }
 

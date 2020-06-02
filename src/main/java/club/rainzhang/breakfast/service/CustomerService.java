@@ -21,24 +21,24 @@ public interface CustomerService {
 
     /**
      * 查看个人信息
-     * @param userId
+     * @param userId 用户Id
      * @return 返回该用户信息
      */
     Object getPersonalInfo(Integer userId);
 
     /**
      * 修改个人信息
-     * @param personalInfo
+     * @param personalInfo 个人信息
      * @return 状态码
      */
     int updatePersonalInfo(JSONObject personalInfo);
 
     /**
      *创建订单
-     * @param OrderInfo
+     * @param orderInfo 订单信息
      * @return 状态码
      */
-    int generateOrder(JSONObject OrderInfo);
+    int generateOrder(JSONObject orderInfo);
 
     /**
      * 确认收货
@@ -49,7 +49,7 @@ public interface CustomerService {
 
     /**
      * 查看店铺内商品
-     * @param shopId
+     * @param shopId 商店 Id
      * @return list
      */
     List<Foods> getFoodList(Integer shopId);
