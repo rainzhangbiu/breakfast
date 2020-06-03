@@ -27,4 +27,5 @@ public class Orders {
     private String comment;
     private Integer status;
     private String address;
+    private Integer price;
 }

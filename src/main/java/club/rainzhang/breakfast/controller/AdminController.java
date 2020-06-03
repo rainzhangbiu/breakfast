@@ -26,7 +26,7 @@ public class AdminController {
         return adminService.changeShopStatus(shop.getShopId());
     }
 
-    @GetMapping("/findAllByShopName")
+    @PostMapping("/findAllByShopName")
     public List<Shops> findAllByShopName(@RequestBody Shops shop) {
         return adminService.findAllByShopName(shop.getShopName());
     }
