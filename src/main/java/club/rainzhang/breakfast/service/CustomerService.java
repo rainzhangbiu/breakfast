@@ -2,9 +2,11 @@ package club.rainzhang.breakfast.service;
 
 
 import club.rainzhang.breakfast.entity.Foods;
+import club.rainzhang.breakfast.entity.Orders;
 import club.rainzhang.breakfast.entity.Shops;
 import club.rainzhang.breakfast.entity.User;
 import com.alibaba.fastjson.JSONObject;
+import org.hibernate.criterion.Order;
 
 import java.util.List;
 
@@ -24,14 +26,14 @@ public interface CustomerService {
      * @param userId 用户Id
      * @return 返回该用户信息
      */
-    Object getPersonalInfo(Integer userId);
+    User getPersonalInfo(Integer userId);
 
     /**
      * 修改个人信息
-     * @param personalInfo 个人信息
+     * @param user 个人信息
      * @return 状态码
      */
-    int updatePersonalInfo(JSONObject personalInfo);
+    int updatePersonalInfo(User user);
 
     /**
      *创建订单
@@ -41,11 +43,20 @@ public interface CustomerService {
     int generateOrder(JSONObject orderInfo);
 
     /**
+     * 查看所有订单
+     * @param userId 用户id
+     * @return 订单列表
+     */
+    List<Orders> getAllOrders(Integer userId);
+
+
+    /**
      * 确认收货
      *
      * @return 状态码
      */
-    int getFood();
+    int ensureOrder(Integer orderId);
+
 
     /**
      * 查看店铺内商品
@@ -54,10 +65,7 @@ public interface CustomerService {
      */
     List<Foods> getFoodList(Integer shopId);
 
-    /**
-     * 查看订单详情
-     * TODO
-     */
+
 
 
 }
