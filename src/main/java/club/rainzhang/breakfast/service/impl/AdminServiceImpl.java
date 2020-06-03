@@ -22,10 +22,21 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int changeShopStatus(Integer shopId, Integer status) {
+    public int changeShopStatus(Integer shopId) {
         Shops shop = shopsRepository.findById(shopId).get();
-        shop.setShopStatus(status);
-        shopsRepository.saveAndFlush(shop);
-        return 0;
+        if (shop.getShopStatus() == 3) {
+            shop.setShopStatus(2);
+            shopsRepository.saveAndFlush(shop);
+            return 1;
+        } else {
+            shop.setShopStatus(3);
+            shopsRepository.saveAndFlush(shop);
+            return 1;
+        }
+    }
+
+    @Override
+    public List<Shops> findAllByShopName(String shopName) {
+        return shopsRepository.findAllByShopName(shopName);
     }
 }
