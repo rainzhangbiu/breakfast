@@ -42,8 +42,8 @@ public class ShopController {
     }
 
     //上架商品
-    @PostMapping("/addFood/{foods}")
-    public int addFood(@PathVariable("foods") Foods foods){
+    @PostMapping("/addFood")
+    public int addFood(@RequestBody Foods foods){
         return shopService.addFood(foods);
     }
 

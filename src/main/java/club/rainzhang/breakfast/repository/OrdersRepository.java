@@ -13,4 +13,6 @@ public interface OrdersRepository extends JpaRepository<Orders,Integer> {
     List<Orders> findAllByShopId(Integer shopId);
 
     Orders findAllByOrderId(Integer orderId);
+
+    List<Orders> findAllByUserId(Integer userId);
 }
