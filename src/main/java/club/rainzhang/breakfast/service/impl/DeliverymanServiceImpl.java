@@ -3,6 +3,7 @@ package club.rainzhang.breakfast.service.impl;
 import club.rainzhang.breakfast.entity.Orders;
 import club.rainzhang.breakfast.entity.User;
 import club.rainzhang.breakfast.repository.OrdersRepository;
+import club.rainzhang.breakfast.repository.UserRepository;
 import club.rainzhang.breakfast.service.DeliverymanService;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class DeliverymanServiceImpl implements DeliverymanService {
     @Autowired
     private OrdersRepository ordersRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public List<Orders> findOrderNeededDelivered() {
         return ordersRepository.findByStatus(3);
@@ -29,8 +33,10 @@ public class DeliverymanServiceImpl implements DeliverymanService {
         Orders order = ordersRepository.findById(orderId).get();
         if (order.getStatus() == 3) {
             order.setStatus(4);
-            order.setDeliverymanId(user.getUserId());
-            order.setDeliverymanName(user.getUserName());
+            Integer id = user.getUserId();
+            order.setDeliverymanId(id);
+            User deliveryman = userRepository.findById(id).get();
+            order.setDeliverymanName(deliveryman.getUserName());
             ordersRepository.save(order);
             return 1;
         } else if (order.getStatus() == 4) {

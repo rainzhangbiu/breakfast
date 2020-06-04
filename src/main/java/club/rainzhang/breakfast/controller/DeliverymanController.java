@@ -22,9 +22,11 @@ public class DeliverymanController {
         return deliverymanService.findOrderNeededDelivered();
     }
 
-    @GetMapping("/changeOrder/{orderId}")
-    public int getOrder(@PathVariable("orderId") Integer orderId, @RequestBody User user) {
-        return deliverymanService.changeOrder(orderId,user);
+    @GetMapping("/changeOrder/{orderId}/{userId}")
+    public int getOrder(@PathVariable("orderId") Integer orderId, @PathVariable("userId") Integer userId) {
+        User deliveryman = new User();
+        deliveryman.setUserId(userId);
+        return deliverymanService.changeOrder(orderId,deliveryman);
     }
 
     @GetMapping("/findMyOrders/{deliverymanId}")
