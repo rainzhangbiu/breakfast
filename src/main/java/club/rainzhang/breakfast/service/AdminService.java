@@ -1,5 +1,6 @@
 package club.rainzhang.breakfast.service;
 
+import club.rainzhang.breakfast.entity.Orders;
 import club.rainzhang.breakfast.entity.Shops;
 
 import java.util.List;
@@ -27,4 +28,10 @@ public interface AdminService {
      * @return 符合要求的店铺集合
      */
     List<Shops> findAllByShopName(String shopName);
+
+    /**
+     * 查看所有的订单
+     * @return 订单集合
+     */
+    List<Orders> findAllOrders();
 }
