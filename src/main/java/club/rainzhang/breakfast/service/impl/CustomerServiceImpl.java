@@ -36,6 +36,13 @@ public class CustomerServiceImpl implements CustomerService {
         return shopsRepository.getByShopStatus(1);
     }
 
+    //搜索特定店铺
+    @Override
+    public  List<Shops> getCertainShopList(String name){
+        return shopsRepository.findAllByShopNameLike("%"+name+"%");
+    }
+
+
     @Override
     public User getPersonalInfo(Integer userId) {
         return userRepository.findById(userId).get();
@@ -70,6 +77,10 @@ public class CustomerServiceImpl implements CustomerService {
     public int generateOrder(JSONObject orderInfo) {
         return 0;
     }
+
+
+
+
 
     @Override
     public int ensureOrder(Integer orderId) {
@@ -158,4 +169,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+    @Override
+    public List<Foods> getCertainFoodList(Integer shopId, String foodName) {
+        try{
+            return foodsRepository.findAllByShopIdAndFoodNameLike(shopId,"%"+foodName+"%");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

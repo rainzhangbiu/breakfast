@@ -22,6 +22,10 @@ public class CustomerController {
     @PostMapping("/getShopList")
     public List<Shops> getShops(){ return customerService.getShopList(); }
 
+    //模糊查询店铺列表
+    @PostMapping("getCertainShopList")
+    public List<Shops> getCertainShopList(@RequestBody Shops shop){return customerService.getCertainShopList(shop.getShopName());}
+
     //获取个人信息
     @PostMapping("/getPersonalInfo")
     public User getPersonalData(@RequestBody User user){return customerService.getPersonalInfo(user.getUserId()); }
@@ -50,8 +54,12 @@ public class CustomerController {
 
 
     //获取店铺商品列表
-    @PostMapping("/getFoodsList/")
+    @PostMapping("/getFoodsList")
     public List<Foods> getFoodsList(@RequestBody Shops shop){ return customerService.getFoodList(shop.getShopId());}
+
+    //模糊查询特定商品
+    @PostMapping("/getCertainFoodsList")
+    public List<Foods> getCertainFoodsList(@RequestBody Foods food){return customerService.getCertainFoodList(food.getShopId(),food.getFoodName());}
 
     //获取订单列表
     @PostMapping("/getOrdersList")

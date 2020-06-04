@@ -19,6 +19,13 @@ public interface CustomerService {
     List<Shops> getShopList();
 
     /**
+     * 模糊搜索根据名称搜索特定店铺
+     * @return 店铺列表
+     */
+    List<Shops> getCertainShopList(String name);
+
+
+    /**
      * 查看个人信息
      * @param userId 用户Id
      * @return 返回该用户信息
@@ -87,6 +94,13 @@ public interface CustomerService {
      * @return list
      */
     List<Foods> getFoodList(Integer shopId);
+
+    /**
+     * 根据名称模糊查找店铺内特定商品
+     * @param  shopId  foodName
+     * @return foodlist
+     */
+    List<Foods> getCertainFoodList(Integer shopId,String foodName);
 
 
 
