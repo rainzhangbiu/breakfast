@@ -3,6 +3,7 @@ package club.rainzhang.breakfast.service.impl;
 import club.rainzhang.breakfast.entity.Foods;
 import club.rainzhang.breakfast.entity.Orders;
 import club.rainzhang.breakfast.entity.Shops;
+import club.rainzhang.breakfast.entity.User;
 import club.rainzhang.breakfast.repository.FoodsRepository;
 import club.rainzhang.breakfast.repository.OrdersRepository;
 import club.rainzhang.breakfast.repository.ShopsRepository;
@@ -117,5 +118,59 @@ public class ShopServiceImpl implements ShopService {
         orders.setStatus(newStatus);
         ordersRepository.saveAndFlush(orders);
         return 0;
+    }
+
+    @Override
+    public int updateFoodInfo(Foods foods) {
+        try{
+            Foods foods1 = foodsRepository.findAllByFoodId(foods.getFoodId());
+            if(foods1==foods){
+                return 1;    //信息未更改
+            }
+            else {
+                foodsRepository.saveAndFlush(foods);
+                return 0;    //修改成功
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return -1;         //出错
+        }
+    }
+
+    @Override
+    public int updateShopInfo(Shops shops) {
+        try{
+            Shops shops1 = shopsRepository.findAllByShopId(shops.getShopId());
+            if(shops1==shops){
+                return 1;    //信息未更改
+            }
+            else {
+                shopsRepository.saveAndFlush(shops);
+                return 0;    //修改成功
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return -1;         //出错
+        }
+    }
+
+    @Override
+    public int updateOrderInfo(Orders orders) {
+        try{
+            Orders orders1 = ordersRepository.findAllByOrderId(orders.getOrderId());
+            if(orders1==orders){
+                return 1;    //信息未更改
+            }
+            else {
+                ordersRepository.saveAndFlush(orders);
+                return 0;    //修改成功
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return -1;         //出错
+        }
     }
 }

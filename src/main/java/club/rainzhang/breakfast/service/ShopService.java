@@ -38,5 +38,11 @@ public interface ShopService {
     List<Orders> findAllOrders(Integer shopId);
     //修改订单状态
     int updateOrderStatus(Integer orderId,Integer newStatus);
+    //修改商品信息
+    int updateFoodInfo(Foods foods);
+    //修改店铺信息
+    int updateShopInfo(Shops shops);
+    //修改订单信息
+    int updateOrderInfo(Orders orders);
 
 }
