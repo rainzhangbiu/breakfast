@@ -32,6 +32,23 @@ public class CustomerController {
         return customerService.updatePersonalInfo(user);
     }
 
+    //获取收货地址
+    @PostMapping("/getAddress")
+    public List<Addresses> getAddress(@RequestBody User user) {return customerService.getAddresses(user.getUserId());}
+
+    //添加收货地址
+    @PostMapping("/addAddress")
+    public Integer addAddress(@RequestBody Addresses addresses) {return customerService.addAddress(addresses.getUserId(),addresses.getAddress());}
+
+    //删除收货地址
+    @PostMapping("/deleteAddress")
+    public Integer deleteAddress(@RequestBody Addresses addresses){return customerService.deleteAddress(addresses.getAddressId());}
+
+    //修改收货地址
+    @PostMapping("/updateAddress")
+    public Integer updateAddress(@RequestBody Addresses address){return  customerService.updateAddress(address);}
+
+
     //获取店铺商品列表
     @PostMapping("/getFoodsList/")
     public List<Foods> getFoodsList(@RequestBody Shops shop){ return customerService.getFoodList(shop.getShopId());}
@@ -43,5 +60,7 @@ public class CustomerController {
     //确认收货
     @PostMapping("/ensureOrder")
     public Integer ensureOrder(@RequestBody Orders order){return customerService.ensureOrder(order.getOrderId());}
+
+
 
 }

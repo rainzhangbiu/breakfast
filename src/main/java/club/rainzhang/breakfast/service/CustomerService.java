@@ -1,10 +1,7 @@
 package club.rainzhang.breakfast.service;
 
 
-import club.rainzhang.breakfast.entity.Foods;
-import club.rainzhang.breakfast.entity.Orders;
-import club.rainzhang.breakfast.entity.Shops;
-import club.rainzhang.breakfast.entity.User;
+import club.rainzhang.breakfast.entity.*;
 import com.alibaba.fastjson.JSONObject;
 import org.hibernate.criterion.Order;
 
@@ -57,6 +54,32 @@ public interface CustomerService {
      */
     int ensureOrder(Integer orderId);
 
+    /**
+     * 获取收货地址列表
+     *
+     *
+     */
+    List<Addresses> getAddresses(Integer userId);
+
+    /**
+     * 添加收货地址
+     *
+     * @return 状态码
+     */
+    int addAddress(Integer userId,String address);
+
+    /**
+     * 修改现有收货地址
+     * @return 状态码
+     */
+    int updateAddress(Addresses address);
+
+    /**
+     * 删除收货地址
+     *TODO 待实现
+     * @return 状态码
+     */
+    int deleteAddress(Integer addressId);
 
     /**
      * 查看店铺内商品

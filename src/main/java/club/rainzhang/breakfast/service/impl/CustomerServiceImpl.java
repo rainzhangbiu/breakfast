@@ -1,13 +1,7 @@
 package club.rainzhang.breakfast.service.impl;
 
-import club.rainzhang.breakfast.entity.Foods;
-import club.rainzhang.breakfast.entity.Orders;
-import club.rainzhang.breakfast.entity.Shops;
-import club.rainzhang.breakfast.entity.User;
-import club.rainzhang.breakfast.repository.FoodsRepository;
-import club.rainzhang.breakfast.repository.OrdersRepository;
-import club.rainzhang.breakfast.repository.ShopsRepository;
-import club.rainzhang.breakfast.repository.UserRepository;
+import club.rainzhang.breakfast.entity.*;
+import club.rainzhang.breakfast.repository.*;
 import club.rainzhang.breakfast.service.CustomerService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private OrdersRepository ordersRepository;
+
+    @Autowired
+    private AddressesRepository addressesRepository;
 
 
     @Override
@@ -85,6 +82,65 @@ public class CustomerServiceImpl implements CustomerService {
         catch (Exception e)
         {
             //未查询到该订单&连接数据库失败
+            System.out.println(e.getMessage());
+            return -1;
+        }
+    }
+
+    //获取地址
+    @Override
+    public List<Addresses> getAddresses(Integer userId) {
+        try{
+            return addressesRepository.findAllByUserId(userId);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    //添加地址
+    @Override
+    public int addAddress(Integer userId, String address) {
+        try{
+            Addresses addresses = new Addresses();
+            addresses.setAddress(address);
+            addresses.setUserId(userId);
+            addressesRepository.saveAndFlush(addresses);
+            return 0;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+    }
+
+    //修改地址
+    @Override
+    public int updateAddress(Addresses address)
+    {
+        try{
+            Addresses addresses = addressesRepository.findById(address.getAddressId()).get();
+            addressesRepository.saveAndFlush(address);
+            return 0;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+    }
+
+
+    @Override
+    public int deleteAddress(Integer addressId) {
+        try{
+            addressesRepository.deleteById(addressId);
+            return 0;
+        }
+        catch (Exception e)
+        {
             System.out.println(e.getMessage());
             return -1;
         }
