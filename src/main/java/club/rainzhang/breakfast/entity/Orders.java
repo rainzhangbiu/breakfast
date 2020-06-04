@@ -23,6 +23,8 @@ public class Orders {
     private Integer orderId;
     private Integer userId;
     private Integer shopId;
+    private Integer deliverymanId;
+    private String deliverymanName;
     private String shopName;
     private Date createTime;
     private String comment;

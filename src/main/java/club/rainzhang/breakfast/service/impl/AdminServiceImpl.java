@@ -1,6 +1,8 @@
 package club.rainzhang.breakfast.service.impl;
 
+import club.rainzhang.breakfast.entity.Orders;
 import club.rainzhang.breakfast.entity.Shops;
+import club.rainzhang.breakfast.repository.OrdersRepository;
 import club.rainzhang.breakfast.repository.ShopsRepository;
 import club.rainzhang.breakfast.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private ShopsRepository shopsRepository;
+
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @Override
     public List<Shops> findAll() {
@@ -38,5 +43,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Shops> findAllByShopName(String shopName) {
         return shopsRepository.findAllByShopName(shopName);
+    }
+
+    @Override
+    public List<Orders> findAllOrders() {
+        return ordersRepository.findAll();
     }
 }

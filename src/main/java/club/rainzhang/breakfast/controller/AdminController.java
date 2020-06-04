@@ -1,5 +1,6 @@
 package club.rainzhang.breakfast.controller;
 
+import club.rainzhang.breakfast.entity.Orders;
 import club.rainzhang.breakfast.entity.Shops;
 import club.rainzhang.breakfast.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,10 @@ public class AdminController {
     @PostMapping("/findAllByShopName")
     public List<Shops> findAllByShopName(@RequestBody Shops shop) {
         return adminService.findAllByShopName(shop.getShopName());
+    }
+
+    @GetMapping("/findAllOrders")
+    public List<Orders> findAllOrders() {
+        return adminService.findAllOrders();
     }
 }
