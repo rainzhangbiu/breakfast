@@ -33,7 +33,7 @@ public interface ShopService {
     //查看某一商品信息
     Foods findFood(Integer foodId);
     //获取店铺信息
-    Shops findShop(Integer shopId);
+    Shops findShop(Integer userId);
     //获取自己店铺订单
     List<Orders> findAllOrders(Integer shopId);
     //修改订单状态

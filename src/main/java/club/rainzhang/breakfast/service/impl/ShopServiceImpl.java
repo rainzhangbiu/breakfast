@@ -103,8 +103,13 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Shops findShop(Integer shopId) {
-        return shopsRepository.findAllByShopId(shopId);
+    public Shops findShop(Integer userId) {
+        List<Shops> shops=shopsRepository.findAllByUserId(userId);
+        if(shops!=null){
+            Integer shopId=shops.get(0).getShopId();
+            return shopsRepository.findAllByShopId(shopId);
+        }
+        return null;
     }
 
     @Override

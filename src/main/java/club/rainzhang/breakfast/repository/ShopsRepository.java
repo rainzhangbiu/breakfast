@@ -15,4 +15,6 @@ public interface ShopsRepository extends JpaRepository<Shops,Integer> {
     List<Shops> findAllByShopName(String shopName);
 
     List<Shops> getByShopStatus(int i);
+
+    List<Shops> findAllByUserId(Integer userId);
 }

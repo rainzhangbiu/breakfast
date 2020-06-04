@@ -92,9 +92,9 @@ public class ShopController {
     public int updateShopInfo(@RequestBody Shops shops){return shopService.updateShopInfo(shops);}
 
     //获取店铺信息
-    @PostMapping("/findShop/{shopId}")
-    public Shops findShop(@PathVariable("shopId") Integer shopId){
-        return shopService.findShop(shopId);
+    @PostMapping("/findShop/{userId}")
+    public Shops findShop(@PathVariable("userId") Integer userId){
+        return shopService.findShop(userId);
     }
 
     //获取自己店铺订单
