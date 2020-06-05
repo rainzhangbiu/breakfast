@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface ShopService {
 
+    int getMaxFoodId();
     //修改商品名字
     int updateFoodName(String newName,Integer foodId);
     //修改店铺状态
@@ -37,7 +38,7 @@ public interface ShopService {
     //获取自己店铺订单
     List<Orders> findAllOrders(Integer shopId);
     //修改订单状态
-    int updateOrderStatus(Integer orderId,Integer newStatus);
+    int updateOrderStatus(Integer orderId);
     //修改商品信息
     int updateFoodInfo(Foods foods);
     //修改店铺信息

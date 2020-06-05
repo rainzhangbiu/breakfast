@@ -17,6 +17,7 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
 
+
 //    //修改商品名字
 //    @PostMapping("/updateFoodName/{newName}/{foodId}")
 //    public int updateFoodName(@PathVariable("newName") String newName,@PathVariable("foodId") Integer foodId){
@@ -40,6 +41,10 @@ public class ShopController {
 //    public int updateFoodDesc(@PathVariable("foodId") Integer foodId,@PathVariable("newDesc") String newDes){
 //        return shopService.updateFoodDescription(foodId, newDes);
 //    }
+    @PostMapping("/get")
+    public int getMax(){
+        return shopService.getMaxFoodId();
+    }
 
     //修改商品信息
     @PostMapping("/updateFoodInfo")
@@ -104,9 +109,9 @@ public class ShopController {
     }
 
     //修改订单状态
-    @PostMapping("/updateOrderStatus/{orderId}/{newStatus}")
-    public int updateOrderStatus(@PathVariable("orderId") Integer orderId,@PathVariable("newStatus") Integer newStatus){
-        return shopService.updateOrderStatus(orderId, newStatus);
+    @PostMapping("/updateOrderStatus/{orderId}")
+    public int updateOrderStatus(@PathVariable("orderId") Integer orderId){
+        return shopService.updateOrderStatus(orderId);
     }
     //修改订单信息
     @PostMapping("/updateOrderInfo")

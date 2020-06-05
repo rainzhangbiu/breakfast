@@ -23,6 +23,24 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private OrdersRepository ordersRepository;
 
+
+    @Override
+    public int getMaxFoodId() {
+        List<Foods> foods=foodsRepository.findAll();
+        int[]foodIds = new int[99];
+        for(int i=0;i<foods.size();i++){
+            Integer foodId=foods.get(i).getFoodId();
+            foodIds[i]=foodId;
+        }
+        int maxFoodId=0;
+        for(int i=0;i<foodIds.length;i++){
+            if(foodIds[i]>=maxFoodId){
+                maxFoodId=foodIds[i];
+            }
+        }
+        return maxFoodId;
+    }
+
     @Override
     public int updateFoodName(String newName, Integer foodId) {
         Foods foods=foodsRepository.findAllByFoodId(foodId);
@@ -81,6 +99,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public int addFood(Foods foods) {
+        Integer id=getMaxFoodId();
+        foods.setFoodId(id+1);
         foodsRepository.save(foods);
         return 0;
     }
@@ -118,9 +138,9 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public int updateOrderStatus(Integer orderId,Integer newStatus) {
+    public int updateOrderStatus(Integer orderId) {
         Orders orders=ordersRepository.findAllByOrderId(orderId);
-        orders.setStatus(newStatus);
+        orders.setStatus(2);
         ordersRepository.saveAndFlush(orders);
         return 0;
     }
