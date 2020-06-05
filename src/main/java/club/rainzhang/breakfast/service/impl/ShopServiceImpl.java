@@ -138,11 +138,15 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public int updateOrderStatus(Integer orderId) {
+    public int updateOrderStatus(Integer orderId,Integer newStatus) {
         Orders orders=ordersRepository.findAllByOrderId(orderId);
-        orders.setStatus(2);
-        ordersRepository.saveAndFlush(orders);
-        return 0;
+        int status=orders.getStatus();
+        if(newStatus>status){
+            orders.setStatus(newStatus);
+            ordersRepository.saveAndFlush(orders);
+            return 0;
+        }
+        return 1;
     }
 
     @Override

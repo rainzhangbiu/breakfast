@@ -109,9 +109,9 @@ public class ShopController {
     }
 
     //修改订单状态
-    @PostMapping("/updateOrderStatus/{orderId}")
-    public int updateOrderStatus(@PathVariable("orderId") Integer orderId){
-        return shopService.updateOrderStatus(orderId);
+    @PostMapping("/updateOrderStatus/{orderId}/{newStatus}")
+    public int updateOrderStatus(@PathVariable("orderId") Integer orderId,@PathVariable Integer newStatus){
+        return shopService.updateOrderStatus(orderId,newStatus);
     }
     //修改订单信息
     @PostMapping("/updateOrderInfo")

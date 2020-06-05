@@ -16,4 +16,5 @@ public interface FoodsRepository extends JpaRepository<Foods,Integer> {
     List<Foods> findAllByShopId(Integer shopId);
 
 
+    List<Foods> findAllByShopIdAndFoodNameLike(Integer shopId, String s);
 }
