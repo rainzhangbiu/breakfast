@@ -129,7 +129,7 @@ public class ShopServiceImpl implements ShopService {
     public int updateFoodInfo(Foods foods) {
         try{
             Foods foods1 = foodsRepository.findAllByFoodId(foods.getFoodId());
-            if(foods1==foods){
+            if(foods1.equals(foods)){
                 return 1;    //信息未更改
             }
             else {
@@ -147,7 +147,7 @@ public class ShopServiceImpl implements ShopService {
     public int updateShopInfo(Shops shops) {
         try{
             Shops shops1 = shopsRepository.findAllByShopId(shops.getShopId());
-            if(shops1==shops){
+            if(shops1.equals(shops)){
                 return 1;    //信息未更改
             }
             else {
