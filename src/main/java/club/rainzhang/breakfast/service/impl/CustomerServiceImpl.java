@@ -3,10 +3,14 @@ package club.rainzhang.breakfast.service.impl;
 import club.rainzhang.breakfast.entity.*;
 import club.rainzhang.breakfast.repository.*;
 import club.rainzhang.breakfast.service.CustomerService;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressesRepository addressesRepository;
+
+    @Autowired
+    private OrderInfoRepository orderInfoRepository;
 
 
     @Override
@@ -74,12 +81,51 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public int generateOrder(JSONObject orderInfo) {
-        return 0;
+    public List<OrderInfo> getOrderDetail(Integer orderId) {
+        return orderInfoRepository.findAllByOrderId(orderId);
     }
 
+    @Override
+    public int generateOrder(JSONObject orderInfo) {
+        try{
+            Orders order = new Orders();
+            order.setStatus(1);
+            order.setAddress(orderInfo.get("address").toString());
+            order.setShopId(Integer.valueOf(orderInfo.get("shopId").toString()));
+            order.setComment(orderInfo.get("comment").toString());
+            order.setPrice(BigDecimal.valueOf(Double.parseDouble(orderInfo.get("price").toString())));
+            order.setCreateTime(new Date());
+            order.setUserId(Integer.valueOf(orderInfo.get("userId").toString()));
+            order.setShopName(orderInfo.get("shopName").toString());
+            ordersRepository.saveAndFlush(order);
+            ordersRepository.delete(order);
 
 
+            JSONArray foodArray = orderInfo.getJSONArray("foods");
+            for(int i = 0; i<foodArray.size(); i++)
+            {
+                JSONObject foodItem = foodArray.getJSONObject(i);
+                Foods food = foodsRepository.findById(Integer.valueOf(foodItem.get("foodId").toString())).get();
+                OrderInfo orderInfoItem = new OrderInfo();
+
+                orderInfoItem.setOrderId(order.getOrderId());
+                orderInfoItem.setAccount(Integer.valueOf(foodItem.get("account").toString()));
+                orderInfoItem.setFood_price(food.getFoodPrice());
+                orderInfoItem.setFoodId(food.getFoodId());
+                orderInfoItem.setFoodName(food.getFoodName());
+                orderInfoItem.setFoodImage(food.getFoodImage());
+                orderInfoRepository.saveAndFlush(orderInfoItem);
+            }
+
+            return 0;
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+
+
+    }
 
 
     @Override
@@ -97,6 +143,7 @@ public class CustomerServiceImpl implements CustomerService {
             return -1;
         }
     }
+
 
     //获取地址
     @Override

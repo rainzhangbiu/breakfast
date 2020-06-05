@@ -53,6 +53,12 @@ public interface CustomerService {
      */
     List<Orders> getAllOrders(Integer userId);
 
+    /**
+     * 查看特定订单详情
+     * @param orderId 订单id
+     * @return orderInfo list
+     */
+    List<OrderInfo> getOrderDetail(Integer orderId);
 
     /**
      * 确认收货

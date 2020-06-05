@@ -2,6 +2,7 @@ package club.rainzhang.breakfast.controller;
 
 import club.rainzhang.breakfast.entity.*;
 import club.rainzhang.breakfast.service.CustomerService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,6 +65,14 @@ public class CustomerController {
     //获取订单列表
     @PostMapping("/getOrdersList")
     public List<Orders> getOrdersList(@RequestBody User user){return customerService.getAllOrders(user.getUserId());}
+
+    //创建订单
+    @PostMapping("/generateOrder")
+    public Integer generateOrder(@RequestBody JSONObject jsonObject){return customerService.generateOrder(jsonObject);}
+
+    //查看订单详情
+    @PostMapping("/getOrderDetail")
+    public List<OrderInfo> getOrderDetail(@RequestBody Orders order){return customerService.getOrderDetail(order.getOrderId());}
 
     //确认收货
     @PostMapping("/ensureOrder")
