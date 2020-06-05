@@ -1,10 +1,7 @@
 package club.rainzhang.breakfast.service;
 
 
-import club.rainzhang.breakfast.entity.Foods;
-import club.rainzhang.breakfast.entity.Orders;
-import club.rainzhang.breakfast.entity.Shops;
-import club.rainzhang.breakfast.entity.User;
+import club.rainzhang.breakfast.entity.*;
 import com.alibaba.fastjson.JSONObject;
 import org.hibernate.criterion.Order;
 
@@ -20,6 +17,13 @@ public interface CustomerService {
      * @return 暂时返回商店信息
      */
     List<Shops> getShopList();
+
+    /**
+     * 模糊搜索根据名称搜索特定店铺
+     * @return 店铺列表
+     */
+    List<Shops> getCertainShopList(String name);
+
 
     /**
      * 查看个人信息
@@ -40,7 +44,7 @@ public interface CustomerService {
      * @param orderInfo 订单信息
      * @return 状态码
      */
-    int generateOrder(JSONObject orderInfo);
+    Orders generateOrder(JSONObject orderInfo);
 
     /**
      * 查看所有订单
@@ -49,6 +53,12 @@ public interface CustomerService {
      */
     List<Orders> getAllOrders(Integer userId);
 
+    /**
+     * 查看特定订单详情
+     * @param orderId 订单id
+     * @return orderInfo list
+     */
+    List<OrderInfo> getOrderDetail(Integer orderId);
 
     /**
      * 确认收货
@@ -57,6 +67,32 @@ public interface CustomerService {
      */
     int ensureOrder(Integer orderId);
 
+    /**
+     * 获取收货地址列表
+     *
+     *
+     */
+    List<Addresses> getAddresses(Integer userId);
+
+    /**
+     * 添加收货地址
+     *
+     * @return 状态码
+     */
+    int addAddress(Integer userId,String address);
+
+    /**
+     * 修改现有收货地址
+     * @return 状态码
+     */
+    int updateAddress(Addresses address);
+
+    /**
+     * 删除收货地址
+     *TODO 待实现
+     * @return 状态码
+     */
+    int deleteAddress(Integer addressId);
 
     /**
      * 查看店铺内商品
@@ -64,6 +100,13 @@ public interface CustomerService {
      * @return list
      */
     List<Foods> getFoodList(Integer shopId);
+
+    /**
+     * 根据名称模糊查找店铺内特定商品
+     * @param  shopId  foodName
+     * @return foodlist
+     */
+    List<Foods> getCertainFoodList(Integer shopId,String foodName);
 
 
 
