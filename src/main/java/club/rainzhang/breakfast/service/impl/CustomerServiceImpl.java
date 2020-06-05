@@ -86,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public int generateOrder(JSONObject orderInfo) {
+    public Orders generateOrder(JSONObject orderInfo) {
         try{
             Orders order = new Orders();
             order.setStatus(1);
@@ -98,7 +98,6 @@ public class CustomerServiceImpl implements CustomerService {
             order.setUserId(Integer.valueOf(orderInfo.get("userId").toString()));
             order.setShopName(orderInfo.get("shopName").toString());
             ordersRepository.saveAndFlush(order);
-            ordersRepository.delete(order);
 
 
             JSONArray foodArray = orderInfo.getJSONArray("foods");
@@ -117,11 +116,11 @@ public class CustomerServiceImpl implements CustomerService {
                 orderInfoRepository.saveAndFlush(orderInfoItem);
             }
 
-            return 0;
+            return order;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
-            return -1;
+            return null;
         }
 
 

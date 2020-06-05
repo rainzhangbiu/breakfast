@@ -44,7 +44,7 @@ public interface CustomerService {
      * @param orderInfo 订单信息
      * @return 状态码
      */
-    int generateOrder(JSONObject orderInfo);
+    Orders generateOrder(JSONObject orderInfo);
 
     /**
      * 查看所有订单

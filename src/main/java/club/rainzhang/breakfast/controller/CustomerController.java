@@ -68,7 +68,7 @@ public class CustomerController {
 
     //创建订单
     @PostMapping("/generateOrder")
-    public Integer generateOrder(@RequestBody JSONObject jsonObject){return customerService.generateOrder(jsonObject);}
+    public Orders generateOrder(@RequestBody JSONObject jsonObject){return customerService.generateOrder(jsonObject);}
 
     //查看订单详情
     @PostMapping("/getOrderDetail")
