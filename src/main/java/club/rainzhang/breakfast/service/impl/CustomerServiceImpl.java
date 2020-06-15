@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -39,13 +38,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public List<Shops> getShopList() {
+    public List<Shop> getShopList() {
         return shopsRepository.getByShopStatus(1);
     }
 
-    //搜索特定店铺
     @Override
-    public  List<Shops> getCertainShopList(String name){
+    public  List<Shop> getCertainShopList(String name){
         return shopsRepository.findAllByShopNameLike("%"+name+"%");
     }
 
@@ -61,34 +59,38 @@ public class CustomerServiceImpl implements CustomerService {
         try{
             User user1 = userRepository.findById(user.getUserId()).get();
             if(user1==user){
-                return 1;    //信息未更改
+                //信息未更改
+                return 1;
             }
             else {
                 userRepository.saveAndFlush(user);
-                return 0;    //修改成功
+                //修改成功
+                return 0;
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-            return -1;         //出错
+            //出错
+            return -1;
         }
     }
 
     @Override
-    public List<Orders> getAllOrders(Integer userId) {
-        List<Orders> ordersList = ordersRepository.findAllByUserId(userId);
-        return ordersList;
+    public List<Order> getAllOrders(Integer userId) {
+        return ordersRepository.findAllByUserId(userId);
     }
+
 
     @Override
     public List<OrderInfo> getOrderDetail(Integer orderId) {
         return orderInfoRepository.findAllByOrderId(orderId);
     }
 
+
     @Override
-    public Orders generateOrder(JSONObject orderInfo) {
+    public Order generateOrder(JSONObject orderInfo) {
         try{
-            Orders order = new Orders();
+            Order order = new Order();
             order.setStatus(1);
             order.setAddress(orderInfo.get("address").toString());
             order.setShopId(Integer.valueOf(orderInfo.get("shopId").toString()));
@@ -104,12 +106,12 @@ public class CustomerServiceImpl implements CustomerService {
             for(int i = 0; i<foodArray.size(); i++)
             {
                 JSONObject foodItem = foodArray.getJSONObject(i);
-                Foods food = foodsRepository.findById(Integer.valueOf(foodItem.get("foodId").toString())).get();
+                Food food = foodsRepository.findById(Integer.valueOf(foodItem.get("foodId").toString())).get();
                 OrderInfo orderInfoItem = new OrderInfo();
 
                 orderInfoItem.setOrderId(order.getOrderId());
                 orderInfoItem.setAccount(Integer.valueOf(foodItem.get("account").toString()));
-                orderInfoItem.setFood_price(food.getFoodPrice());
+                orderInfoItem.setFoodPrice(food.getFoodPrice());
                 orderInfoItem.setFoodId(food.getFoodId());
                 orderInfoItem.setFoodName(food.getFoodName());
                 orderInfoItem.setFoodImage(food.getFoodImage());
@@ -130,7 +132,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public int ensureOrder(Integer orderId) {
         try{
-            Orders order = ordersRepository.findById(orderId).get();
+            Order order = ordersRepository.findById(orderId).get();
             order.setStatus(6);
             ordersRepository.saveAndFlush(order);
             return 0;
@@ -143,10 +145,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-
-    //获取地址
     @Override
-    public List<Addresses> getAddresses(Integer userId) {
+    public List<Address> getAddresses(Integer userId) {
         try{
             return addressesRepository.findAllByUserId(userId);
         }
@@ -156,11 +156,10 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    //添加地址
     @Override
     public int addAddress(Integer userId, String address) {
         try{
-            Addresses addresses = new Addresses();
+            Address addresses = new Address();
             addresses.setAddress(address);
             addresses.setUserId(userId);
             addressesRepository.saveAndFlush(addresses);
@@ -173,12 +172,11 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    //修改地址
     @Override
-    public int updateAddress(Addresses address)
+    public int updateAddress(Address address)
     {
         try{
-            Addresses addresses = addressesRepository.findById(address.getAddressId()).get();
+            addressesRepository.findById(address.getAddressId()).get();
             addressesRepository.saveAndFlush(address);
             return 0;
         }
@@ -204,7 +202,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Foods> getFoodList(Integer shopId) {
+    public List<Food> getFoodList(Integer shopId) {
         try{
             return foodsRepository.findAllByShopId(shopId);
         }
@@ -216,7 +214,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Foods> getCertainFoodList(Integer shopId, String foodName) {
+    public List<Food> getCertainFoodList(Integer shopId, String foodName) {
         try{
             return foodsRepository.findAllByShopIdAndFoodNameLike(shopId,"%"+foodName+"%");
         }

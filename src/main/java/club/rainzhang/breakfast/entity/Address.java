@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-public class Addresses {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;

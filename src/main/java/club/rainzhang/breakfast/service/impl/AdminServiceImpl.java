@@ -1,7 +1,7 @@
 package club.rainzhang.breakfast.service.impl;
 
-import club.rainzhang.breakfast.entity.Orders;
-import club.rainzhang.breakfast.entity.Shops;
+import club.rainzhang.breakfast.entity.Order;
+import club.rainzhang.breakfast.entity.Shop;
 import club.rainzhang.breakfast.repository.OrdersRepository;
 import club.rainzhang.breakfast.repository.ShopsRepository;
 import club.rainzhang.breakfast.service.AdminService;
@@ -22,31 +22,29 @@ public class AdminServiceImpl implements AdminService {
     private OrdersRepository ordersRepository;
 
     @Override
-    public List<Shops> findAll() {
+    public List<Shop> findAll() {
         return shopsRepository.findAll();
     }
 
     @Override
     public int changeShopStatus(Integer shopId) {
-        Shops shop = shopsRepository.findById(shopId).get();
+        Shop shop = shopsRepository.findById(shopId).get();
         if (shop.getShopStatus() == 3) {
             shop.setShopStatus(2);
-            shopsRepository.saveAndFlush(shop);
-            return 1;
         } else {
             shop.setShopStatus(3);
-            shopsRepository.saveAndFlush(shop);
-            return 1;
         }
+        shopsRepository.saveAndFlush(shop);
+        return 1;
     }
 
     @Override
-    public List<Shops> findAllByShopName(String shopName) {
+    public List<Shop> findAllByShopName(String shopName) {
         return shopsRepository.findAllByShopName(shopName);
     }
 
     @Override
-    public List<Orders> findAllOrders() {
+    public List<Order> findAllOrders() {
         return ordersRepository.findAll();
     }
 }

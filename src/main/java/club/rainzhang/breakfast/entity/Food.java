@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-public class Foods {
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer foodId;

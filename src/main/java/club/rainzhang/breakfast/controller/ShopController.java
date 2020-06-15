@@ -1,14 +1,17 @@
 package club.rainzhang.breakfast.controller;
 
-import club.rainzhang.breakfast.entity.Foods;
-import club.rainzhang.breakfast.entity.Orders;
-import club.rainzhang.breakfast.entity.Shops;
+import club.rainzhang.breakfast.entity.Food;
+import club.rainzhang.breakfast.entity.Order;
+import club.rainzhang.breakfast.entity.Shop;
 import club.rainzhang.breakfast.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
+
+/**
+ * @author 吴勇
+ */
 
 @RestController
 @RequestMapping("/shop")
@@ -17,8 +20,111 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
 
+    /**
+     * 找到食品 id 的最大值
+     * @return 食品 id 的最大值
+     */
+    @PostMapping("/get")
+    public int getMax(){
+        return shopService.getMaxFoodId();
+    }
 
-//    //修改商品名字
+    /**
+     * 修改商品信息
+     * @param food 商品信息
+     * @return 操作结果
+     */
+    @PostMapping("/updateFoodInfo")
+    public int updateFoodInfo(@RequestBody Food food){return shopService.updateFoodInfo(food);}
+
+    /**
+     * 上架商品
+     * @param food 商品信息
+     * @return 操作结果
+     */
+    @PostMapping("/addFood")
+    public int addFood(@RequestBody Food food){
+        return shopService.addFood(food);
+    }
+
+    /**
+     * 下架商品
+     * @param foodId 商品的 foodId
+     * @return 操作结果
+     */
+    @PostMapping("/deleteFood/{foodId}")
+    public int deleteFood(@PathVariable("foodId") Integer foodId){
+        return shopService.deleteFood(foodId);
+    }
+
+    /**
+     * 查看所有商品信息
+     * @param shopId 店铺的 shopId
+     * @return 商品信息集合
+     */
+    @PostMapping("/findAllFoods/{shopId}")
+    public List<Food> findAllFoods(@PathVariable("shopId") Integer shopId){
+        return shopService.findAllFoods(shopId);
+    }
+
+    /**
+     * 查看某一商品信息
+     * @param foodId 指定商品的 foodId
+     * @return Food 对象
+     */
+    @PostMapping("/findFood/{foodId}")
+    public Food findFood(@PathVariable("foodId") Integer foodId){
+        return shopService.findFood(foodId);
+    }
+
+    /**
+     * 修改店铺信息
+     * @param shop 店铺信息
+     * @return 操作结果
+     */
+    @PostMapping("/updateShopInfo")
+    public int updateShopInfo(@RequestBody Shop shop){return shopService.updateShopInfo(shop);}
+
+    /**
+     * 获取店铺信息
+     * @param userId 商家的 userId
+     * @return Shop 对象
+     */
+    @PostMapping("/findShop/{userId}")
+    public Shop findShop(@PathVariable("userId") Integer userId){
+        return shopService.findShop(userId);
+    }
+
+    /**
+     * 获取自己店铺订单
+     * @param shopId 店铺的 shopId
+     * @return 订单信息集合
+     */
+    @PostMapping("/findAllOrders/{shopId}")
+    public List<Order> findAllOrders(@PathVariable("shopId") Integer shopId){
+        return shopService.findAllOrders(shopId);
+    }
+
+    /**
+     * 修改订单状态
+     * @param orderId 订单的 orderId
+     * @param newStatus 改变之后的状态
+     * @return 操作结果
+     */
+    @PostMapping("/updateOrderStatus/{orderId}/{newStatus}")
+    public int updateOrderStatus(@PathVariable("orderId") Integer orderId,@PathVariable Integer newStatus){
+        return shopService.updateOrderStatus(orderId,newStatus);
+    }
+
+    /**
+     * 修改订单信息
+     * @param order 订单信息
+     * @return 操作结果
+     */
+    @PostMapping("/updateOrderInfo")
+    public int updateOrderInfo(@RequestBody Order order){return shopService.updateOrderInfo(order);}
+
+    //    //修改商品名字
 //    @PostMapping("/updateFoodName/{newName}/{foodId}")
 //    public int updateFoodName(@PathVariable("newName") String newName,@PathVariable("foodId") Integer foodId){
 //        return shopService.updateFoodName(newName,foodId);
@@ -41,38 +147,6 @@ public class ShopController {
 //    public int updateFoodDesc(@PathVariable("foodId") Integer foodId,@PathVariable("newDesc") String newDes){
 //        return shopService.updateFoodDescription(foodId, newDes);
 //    }
-    @PostMapping("/get")
-    public int getMax(){
-        return shopService.getMaxFoodId();
-    }
-
-    //修改商品信息
-    @PostMapping("/updateFoodInfo")
-    public int updateFoodInfo(@RequestBody Foods foods){return shopService.updateFoodInfo(foods);}
-
-    //上架商品
-    @PostMapping("/addFood")
-    public int addFood(@RequestBody Foods foods){
-        return shopService.addFood(foods);
-    }
-
-    //下架商品
-    @PostMapping("/deleteFood/{foodId}")
-    public int deleteFood(@PathVariable("foodId") Integer foodId){
-        return shopService.deleteFood(foodId);
-    }
-
-    //查看所有商品信息
-    @PostMapping("/findAllFoods/{shopId}")
-    public List<Foods> findAllFoods(@PathVariable("shopId") Integer shopId){
-        return shopService.findAllFoods(shopId);
-    }
-
-    //查看某一商品信息
-    @PostMapping("/findFood/{foodId}")
-    public Foods findFood(@PathVariable("foodId") Integer foodId){
-        return shopService.findFood(foodId);
-    }
 
 //    //修改店铺状态
 //    @PostMapping("/updateShopStatus/{shopId}/{newStatus}")
@@ -92,28 +166,5 @@ public class ShopController {
 //        return shopService.updateShopDescription(shopId,newDesc);
 //    }
 
-    //修改店铺信息
-    @PostMapping("/updateShopInfo")
-    public int updateShopInfo(@RequestBody Shops shops){return shopService.updateShopInfo(shops);}
 
-    //获取店铺信息
-    @PostMapping("/findShop/{userId}")
-    public Shops findShop(@PathVariable("userId") Integer userId){
-        return shopService.findShop(userId);
-    }
-
-    //获取自己店铺订单
-    @PostMapping("/findAllOrders/{shopId}")
-    public List<Orders> findAllOrders(@PathVariable("shopId") Integer shopId){
-        return shopService.findAllOrders(shopId);
-    }
-
-    //修改订单状态
-    @PostMapping("/updateOrderStatus/{orderId}/{newStatus}")
-    public int updateOrderStatus(@PathVariable("orderId") Integer orderId,@PathVariable Integer newStatus){
-        return shopService.updateOrderStatus(orderId,newStatus);
-    }
-    //修改订单信息
-    @PostMapping("/updateOrderInfo")
-    public int updateOrderInfo(@RequestBody Orders orders){return shopService.updateOrderInfo(orders);}
 }

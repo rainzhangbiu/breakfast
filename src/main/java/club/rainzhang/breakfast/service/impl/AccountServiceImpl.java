@@ -1,6 +1,6 @@
 package club.rainzhang.breakfast.service.impl;
 
-import club.rainzhang.breakfast.entity.Shops;
+import club.rainzhang.breakfast.entity.Shop;
 import club.rainzhang.breakfast.entity.User;
 import club.rainzhang.breakfast.form.UserNameAndPassword;
 import club.rainzhang.breakfast.repository.ShopsRepository;
@@ -43,12 +43,12 @@ public class AccountServiceImpl implements AccountService {
             return 1;
         } catch (Exception e) {
             if (user.getType() == 1) {
-                Shops shops = new Shops();
-                shops.setShopName(user.getUserName()+"的店");
-                shops.setShopStatus(1);
-                shops.setUserId(user.getUserId());
-                shops.setShopAddress("");
-                shopsRepository.saveAndFlush(shops);
+                Shop shop = new Shop();
+                shop.setShopName(user.getUserName()+"的店");
+                shop.setShopStatus(1);
+                shop.setUserId(user.getUserId());
+                shop.setShopAddress("");
+                shopsRepository.saveAndFlush(shop);
             }
             userRepository.save(user);
             return 0;

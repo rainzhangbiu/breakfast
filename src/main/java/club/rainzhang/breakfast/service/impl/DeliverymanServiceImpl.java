@@ -1,11 +1,10 @@
 package club.rainzhang.breakfast.service.impl;
 
-import club.rainzhang.breakfast.entity.Orders;
+import club.rainzhang.breakfast.entity.Order;
 import club.rainzhang.breakfast.entity.User;
 import club.rainzhang.breakfast.repository.OrdersRepository;
 import club.rainzhang.breakfast.repository.UserRepository;
 import club.rainzhang.breakfast.service.DeliverymanService;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +23,13 @@ public class DeliverymanServiceImpl implements DeliverymanService {
     private UserRepository userRepository;
 
     @Override
-    public List<Orders> findOrderNeededDelivered() {
+    public List<Order> findOrderNeededDelivered() {
         return ordersRepository.findByStatus(3);
     }
 
     @Override
     public int changeOrder(Integer orderId, User user) {
-        Orders order = ordersRepository.findById(orderId).get();
+        Order order = ordersRepository.findById(orderId).get();
         if (order.getStatus() == 3) {
             order.setStatus(4);
             Integer id = user.getUserId();
@@ -49,7 +48,7 @@ public class DeliverymanServiceImpl implements DeliverymanService {
     }
 
     @Override
-    public List<Orders> findMyOrders(Integer deliverymanId) {
+    public List<Order> findMyOrders(Integer deliverymanId) {
         return ordersRepository.findByDeliverymanId(deliverymanId);
     }
 

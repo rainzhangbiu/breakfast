@@ -1,6 +1,6 @@
 package club.rainzhang.breakfast.repository;
 
-import club.rainzhang.breakfast.entity.Addresses;
+import club.rainzhang.breakfast.entity.Address;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,17 +8,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class AddressesRepositoryTest {
+class AddressRepositoryTest {
     @Autowired
     private AddressesRepository addressesRepository;
 
     @Test
     void test() {
-        List<Addresses> addressesList = addressesRepository.findAll();
-        for (Addresses address : addressesList) {
+        List<Address> addressList = addressesRepository.findAll();
+        for (Address address : addressList) {
             System.out.println(address);
         }
     }

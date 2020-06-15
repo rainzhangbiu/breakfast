@@ -25,6 +25,6 @@ public class OrderInfo {
     private Integer foodId;
     private String foodName;
     private String foodImage;
-    private BigDecimal food_price;
+    private BigDecimal foodPrice;
     private Integer account;
 }

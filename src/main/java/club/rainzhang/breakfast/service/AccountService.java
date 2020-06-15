@@ -2,8 +2,6 @@ package club.rainzhang.breakfast.service;
 
 import club.rainzhang.breakfast.entity.User;
 import club.rainzhang.breakfast.form.UserNameAndPassword;
-import club.rainzhang.breakfast.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author zyyy

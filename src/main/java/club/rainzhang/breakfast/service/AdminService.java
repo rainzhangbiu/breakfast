@@ -1,7 +1,7 @@
 package club.rainzhang.breakfast.service;
 
-import club.rainzhang.breakfast.entity.Orders;
-import club.rainzhang.breakfast.entity.Shops;
+import club.rainzhang.breakfast.entity.Order;
+import club.rainzhang.breakfast.entity.Shop;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface AdminService {
      * 查询所有的店家
      * @return 店家信息集合
      */
-    List<Shops> findAll();
+    List<Shop> findAll();
 
     /**
      * 修改店家状态
@@ -27,11 +27,11 @@ public interface AdminService {
      * @param shopName 店铺名
      * @return 符合要求的店铺集合
      */
-    List<Shops> findAllByShopName(String shopName);
+    List<Shop> findAllByShopName(String shopName);
 
     /**
      * 查看所有的订单
      * @return 订单集合
      */
-    List<Orders> findAllOrders();
+    List<Order> findAllOrders();
 }

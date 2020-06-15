@@ -1,6 +1,6 @@
 package club.rainzhang.breakfast.service;
 
-import club.rainzhang.breakfast.entity.Orders;
+import club.rainzhang.breakfast.entity.Order;
 import club.rainzhang.breakfast.entity.User;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface DeliverymanService {
      * 查看需要配送的订单
      * @return 需要配送的订单集合
      */
-    List<Orders> findOrderNeededDelivered();
+    List<Order> findOrderNeededDelivered();
 
     /**
      * 接单
@@ -28,7 +28,7 @@ public interface DeliverymanService {
      * @param deliverymanId 配送员 Id
      * @return 该配送员的所有订单
      */
-    List<Orders> findMyOrders(Integer deliverymanId);
+    List<Order> findMyOrders(Integer deliverymanId);
 
 
 }
